@@ -3,11 +3,14 @@ import Layout from '../components/Layout'
 import { useEffect, useState } from 'react'
 import { getSingleProduct } from '../service/product'
 import { useAuth } from '../utils/useAuth'
+import { useDispatch } from 'react-redux'
+import { addProduct } from '../store/slice/cartSlice'
 
 const DetailProduct = () => {
   const navigate = useNavigate()
   let isLoggedIn = useAuth()
   let { id } = useParams()
+  const dispatch = useDispatch()
 
   console.log('isLoggedIn', isLoggedIn)
 
@@ -26,7 +29,7 @@ const DetailProduct = () => {
   const handleClick = () => {
     if (isLoggedIn) {
       // kalau sudah login, masukkan produk ke cart
-      console.log('item', product)
+      dispatch(addProduct(product))
     } else {
       // kalau belum, login dahulu
       navigate('/login')

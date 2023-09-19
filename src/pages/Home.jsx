@@ -7,8 +7,17 @@ import {
 } from '../service/product'
 import ProductItem from '../components/ProductItem'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { inc } from '../store/slice/countSlice'
 
 const Home = () => {
+  const count = useSelector((state) => state.count.value)
+  const cart = useSelector((state) => state.cart.cart)
+
+  console.log('cart', cart)
+  console.log('count', count)
+  const dispatch = useDispatch()
+
   const navigate = useNavigate()
 
   const [listProduct, setLisProduct] = useState([])

@@ -1,7 +1,9 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../utils/useAuth'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+  const cart = useSelector((state) => state.cart.cart)
   // if current location is login page, remove login link
   let location = useLocation()
   let isLogin = location.pathname.includes('/login')
@@ -19,11 +21,17 @@ const Header = () => {
       </Link>
       {!isLogin ? (
         isLoggedIn ? (
-          <p
-            className='border px-6 py-1 rounded-md hover:underline'
-            onClick={onLogout}>
-            Logout
-          </p>
+          <div className='flex items-center'>
+            <Link to='/cart' className='mr-10'>
+              Cart
+              <p className='absolute top-5 ml-10'>{cart.length}</p>
+            </Link>
+            <p
+              className='border px-6 py-1 rounded-md hover:underline'
+              onClick={onLogout}>
+              Logout
+            </p>
+          </div>
         ) : (
           <Link
             to='/login'
