@@ -24,7 +24,9 @@ const Header = () => {
           <div className='flex items-center'>
             <Link to='/cart' className='mr-10'>
               Cart
-              <p className='absolute top-5 ml-10'>{cart.length}</p>
+              <p className='absolute top-5 ml-10'>
+                {cart.length > 0 ? cart.length : null}
+              </p>
             </Link>
             <p
               className='border px-6 py-1 rounded-md hover:underline'
