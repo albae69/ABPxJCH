@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import {
   getCategory,
@@ -9,20 +9,18 @@ import ProductItem from '../components/ProductItem'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { inc } from '../store/slice/countSlice'
+import { CountContext } from '../store/count'
 
 const Home = () => {
-  const count = useSelector((state) => state.count.value)
-  const cart = useSelector((state) => state.cart.cart)
-
-  console.log('cart', cart)
-  console.log('count', count)
-  const dispatch = useDispatch()
+  // const { state, dispatch } = useContext(CountContext)
+  // console.log('state', state.count)
 
   const navigate = useNavigate()
 
   const [listProduct, setLisProduct] = useState([])
   const [listCategory, setListCategory] = useState([])
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
 
   const init = async () => {
     try {
@@ -34,6 +32,8 @@ const Home = () => {
       setLoading(false)
     } catch (error) {
       console.log('error while init')
+      setLoading(false)
+      setError(true)
     }
   }
 
@@ -69,7 +69,6 @@ const Home = () => {
           ))}
       </section>
       {/* Categories */}
-
       {/* Product */}
       <section className='flex flex-wrap'>
         {loading ? (

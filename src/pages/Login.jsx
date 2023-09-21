@@ -4,6 +4,7 @@ import Input from '../components/Input'
 import Button from '../components/Button'
 import { login } from '../service/auth'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../utils/useAuth'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -27,9 +28,10 @@ const Login = () => {
     }
   }
 
+  let isLogged = useAuth()
+
   useEffect(() => {
-    let token = localStorage.getItem('token')
-    if (token != null) {
+    if (isLogged) {
       navigate('/', { replace: '/' })
     }
   }, [])
