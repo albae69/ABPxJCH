@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
 import {
   getCategory,
@@ -7,14 +7,8 @@ import {
 } from '../service/product'
 import ProductItem from '../components/ProductItem'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { inc } from '../store/slice/countSlice'
-import { CountContext } from '../store/count'
 
 const Home = () => {
-  // const { state, dispatch } = useContext(CountContext)
-  // console.log('state', state.count)
-
   const navigate = useNavigate()
 
   const [listProduct, setLisProduct] = useState([])
