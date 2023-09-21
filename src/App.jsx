@@ -3,7 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 
 import Router from './router'
 import store from './store'
-import CountProvider from './store/count'
+// import CountProvider from './store/count'
 
 const App = () => {
   return (
