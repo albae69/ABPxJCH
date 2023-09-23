@@ -1,10 +1,14 @@
-import React from 'react'
+import { useEffect } from 'react'
 import Layout from '../components/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import CartItem from '../components/CartItem'
 import { removeProduct } from '../store/slice/cartSlice'
+import { useAuth } from '../utils/useAuth'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
+  const navigate = useNavigate()
+
   const cart = useSelector((state) => state.cart.cart)
   const dispatch = useDispatch()
 
@@ -12,6 +16,14 @@ const Cart = () => {
     dispatch(removeProduct(id))
     console.log('cart', cart)
   }
+
+  let isLogged = useAuth()
+
+  useEffect(() => {
+    if (!isLogged) {
+      navigate('/', { replace: '/' })
+    }
+  }, [])
 
   return (
     <Layout>
