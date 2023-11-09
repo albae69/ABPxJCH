@@ -8,25 +8,25 @@ const ProductItem = ({
 }) => {
   return (
     <div
-      className='w-[300px] rounded-xl border border-gray-200 shadow-lg p-4 mx-2 mb-1 scale-95 hover:scale-100 cursor-pointer'
+      className='w-full  rounded-xl border border-gray-200 shadow-lg scale-95 hover:scale-100 cursor-pointer p-4'
       onClick={onClick}>
       {image ? (
         <img
           src={image}
           alt='product image'
-          className='h-[200px] w-full object-contain mb-4 '
+          className='h-[250px] w-full object-contain mb-4 '
         />
       ) : (
-        <div className='h-[200px] w-full bg-gray-200 rounded-md mb-2' />
+        <div className='h-[250px] w-full bg-gray-200 rounded-md mb-2' />
       )}
-      <h3 className='font-bold text-base'>{title || 'title'}</h3>
-      <h3 className='font-semibold'>${price || 'price'}</h3>
-      <p className='font-regular text-sm'>{category || 'category'}</p>
-      <p className='font-regular text-sm '>
-        {description.length > 100
-          ? `${description.slice(0, 100)}...`
-          : description || 'description'}
+      <h3 className='font-semibold text-base line-clamp-1'>
+        {title || 'title'}
+      </h3>
+      <h3 className='font-bold'>${price || 'price'}</h3>
+      <p className='font-bold text-sm capitalize mb-1'>
+        {category || 'category'}
       </p>
+      <p className='font-regular text-sm line-clamp-2'>{description}</p>
     </div>
   )
 }

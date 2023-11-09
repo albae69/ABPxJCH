@@ -16,8 +16,8 @@ const Header = () => {
 
   return (
     <header className='h-[80px] flex flex-row items-center justify-between'>
-      <Link to='/'>
-        <h1 className='font-bold text-3xl'>Fakestore</h1>
+      <Link to='/' reloadDocument>
+        <h1 className='font-bold text-3xl'>FakeStore v2</h1>
       </Link>
       {!isLogin ? (
         isLoggedIn ? (
@@ -29,7 +29,7 @@ const Header = () => {
               </p>
             </Link>
             <p
-              className='border px-6 py-1 rounded-md hover:underline'
+              className='border px-10 py-1 rounded-md hover:underline'
               onClick={onLogout}>
               Logout
             </p>
@@ -37,7 +37,7 @@ const Header = () => {
         ) : (
           <Link
             to='/login'
-            className='border px-6 py-1 rounded-md hover:underline'>
+            className='border px-10 py-1 rounded-md hover:underline'>
             Login
           </Link>
         )

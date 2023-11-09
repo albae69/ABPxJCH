@@ -7,6 +7,7 @@ import {
 } from '../service/product'
 import ProductItem from '../components/ProductItem'
 import { useNavigate } from 'react-router-dom'
+import ProductItemSkeleton from '../components/ProductItemSkeleton'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -17,8 +18,10 @@ const Home = () => {
   const [error, setError] = useState(false)
 
   const init = async () => {
+    setLoading(true)
+    setError(false)
+
     try {
-      setLoading(true)
       let product = await getProduct()
       setLisProduct(product)
       let category = await getCategory()
@@ -32,13 +35,15 @@ const Home = () => {
   }
 
   const getProductCategory = async (category) => {
+    setLoading(true)
     try {
-      setLoading(true)
       const response = await getProductByCategory(category)
       console.log('response getProductCategory', response)
       setLisProduct(response)
       setLoading(false)
+      setLoading(false)
     } catch (error) {
+      setError(true)
       setLoading(false)
       console.log('error while getProductCategory')
     }
@@ -48,25 +53,50 @@ const Home = () => {
     init()
   }, [])
 
+  if (error) {
+    return (
+      <Layout>
+        <section className='flex flex-1 items-center justify-center'>
+          <div className='text-center'>
+            <h1 className='text-red-500 font-bold text-5xl pt-[100px] mb-10'>
+              Something Error!
+            </h1>
+            <p className='hover:underline hover:cursor-pointer' onClick={init}>
+              Try again
+            </p>
+          </div>
+        </section>
+      </Layout>
+    )
+  }
+
   return (
     <Layout>
       {/* Categories */}
       <section className='flex justify-center items-center h-4 mb-16'>
-        {listCategory.length > 0 &&
-          listCategory.map((category) => (
-            <p
-              key={category}
-              className='mx-3 cursor-pointer hover:underline'
-              onClick={() => getProductCategory(category)}>
-              {category.replace("'s clothing", '').toUpperCase()}
-            </p>
-          ))}
+        <div className='flex'>
+          {listCategory.length > 0 &&
+            listCategory.map((category) => (
+              <p
+                key={category}
+                className='mx-3 cursor-pointer hover:underline text-sm md:text-base capitalize'
+                onClick={() => getProductCategory(category)}>
+                {category.replace("'s clothing", '')}
+              </p>
+            ))}
+        </div>
       </section>
       {/* Categories */}
+
       {/* Product */}
-      <section className='flex flex-wrap'>
+      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto'>
         {loading ? (
-          <p className='flex-1 items-center text-center'>loading...</p>
+          <>
+            <ProductItemSkeleton />
+            <ProductItemSkeleton />
+            <ProductItemSkeleton />
+            <ProductItemSkeleton />
+          </>
         ) : (
           listProduct.length > 0 &&
           listProduct.map((product) => (
