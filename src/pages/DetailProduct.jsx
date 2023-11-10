@@ -13,8 +13,6 @@ const DetailProduct = () => {
   let { id } = useParams()
   const dispatch = useDispatch()
 
-  console.log('isLoggedIn', isLoggedIn)
-
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
 

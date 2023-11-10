@@ -1,30 +1,35 @@
 import { useEffect, useState } from 'react'
 import Layout from '../components/Layout'
-import Input from '../components/Input'
-import Button from '../components/Button'
 import { login } from '../service/auth'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/useAuth'
+import toast from 'react-hot-toast'
 
 const Login = () => {
   const navigate = useNavigate()
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState('mor_2314')
+  const [password, setPassword] = useState('83r5^_')
+  const [loading, setLoading] = useState(false)
 
-  const onLogin = async () => {
+  const onLogin = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+
     try {
       let data = {
         username: username,
         password: password,
       }
-      console.log('data to send', data)
       const response = await login(data)
-      console.log('response onLogin', response)
       localStorage.setItem('token', response.token)
+      toast.success('Login successfully')
       navigate('/', { replace: true })
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.error('error while onLogin', error)
+      toast.error(error?.response?.data)
     }
   }
 
@@ -39,21 +44,35 @@ const Login = () => {
   return (
     <Layout>
       <section className='flex flex-1 items-center justify-center pt-10'>
-        <div>
-          <Input
-            label='Username'
+        <form
+          onSubmit={onLogin}
+          className='rounded-lg border shadow-sm w-[500px] p-10'>
+          <h1 className='font-bold text-2xl text-black mb-4'>Login</h1>
+          <p className='mb-2'>Username</p>
+          <input
+            label='username'
             type='text'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className='h-10 border border-gray-500 rounded-md  w-full px-2 mb-4 focus:outline-none'
+            required
           />
-          <Input
+          <p className='mb-2'>Password</p>
+          <input
             label='Password'
             type='password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className='h-10 border border-gray-500 rounded-md  w-full px-2 mb-4 focus:outline-none'
+            required
           />
-          <Button title='Login' onClick={onLogin} />
-        </div>
+          <button
+            disabled={loading}
+            className='h-[48px] w-full bg-black text-white rounded-md mt-[20px]'
+            type='submit'>
+            {loading ? 'loading...' : 'Login'}
+          </button>
+        </form>
       </section>
     </Layout>
   )

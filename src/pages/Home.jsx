@@ -8,6 +8,7 @@ import {
 import ProductItem from '../components/ProductItem'
 import { useNavigate } from 'react-router-dom'
 import ProductItemSkeleton from '../components/ProductItemSkeleton'
+import toast from 'react-hot-toast'
 
 const Home = () => {
   const navigate = useNavigate()
@@ -31,6 +32,7 @@ const Home = () => {
       console.log('error while init')
       setLoading(false)
       setError(true)
+      toast.error('something error')
     }
   }
 
