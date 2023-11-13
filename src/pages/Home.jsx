@@ -15,7 +15,7 @@ const Home = () => {
 
   const [listProduct, setLisProduct] = useState([])
   const [listCategory, setListCategory] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
   const init = async () => {
@@ -91,7 +91,7 @@ const Home = () => {
       {/* Categories */}
 
       {/* Product */}
-      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mx-auto'>
+      <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto'>
         {loading ? (
           <>
             <ProductItemSkeleton />

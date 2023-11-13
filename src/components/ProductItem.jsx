@@ -8,7 +8,7 @@ const ProductItem = ({
 }) => {
   return (
     <div
-      className='w-full  rounded-xl border border-gray-200 shadow-lg scale-95 hover:scale-100 cursor-pointer p-4'
+      className='w-full  rounded-xl border border-gray-200 shadow-lg cursor-pointer p-4 hover:-translate-y-1'
       onClick={onClick}>
       {image ? (
         <img

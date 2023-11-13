@@ -34,7 +34,6 @@ const DetailProduct = () => {
     if (isLoggedIn) {
       // kalau sudah login, masukkan produk ke cart
       dispatch(addProduct(product))
-      navigate('/cart')
     } else {
       // kalau belum, login dahulu
       navigate('/login')
