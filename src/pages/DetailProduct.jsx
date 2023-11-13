@@ -6,6 +6,7 @@ import { getSingleProduct } from '../service/product'
 import { useAuth } from '../utils/useAuth'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../store/slice/cartSlice'
+import toast from 'react-hot-toast'
 
 const DetailProduct = () => {
   const navigate = useNavigate()
@@ -33,9 +34,11 @@ const DetailProduct = () => {
     if (isLoggedIn) {
       // kalau sudah login, masukkan produk ke cart
       dispatch(addProduct(product))
+      navigate('/cart')
     } else {
       // kalau belum, login dahulu
       navigate('/login')
+      toast.error('Unauthorized, please login first!')
     }
   }
 
@@ -45,7 +48,7 @@ const DetailProduct = () => {
 
   return (
     <Layout>
-      <section className='grid grid-cols-1 gap-4 md:grid-cols-2 pt-[100px]'>
+      <section className='grid grid-cols-1 gap-4 md:grid-cols-2  md:pt-[100px]'>
         {/* Left */}
         <div className='flex items-center justify-center mb-[100px]'>
           {loading ? (
@@ -64,7 +67,7 @@ const DetailProduct = () => {
         {loading ? (
           <DetailProductSkeleton />
         ) : (
-          <div>
+          <div className='mb-10'>
             <h3 className='font-bold text-2xl'>{product?.title}</h3>
             <h3 className='font-semibold text-xl'>${product?.price}</h3>
             <p className='font-regular text-md text-gray-500 mb-2'>

@@ -26,7 +26,8 @@ const Cart = () => {
   const ESTIMATED_TAX = (SUBTOTAL * 0.1).toFixed(2)
   const ESTIMATED_SHIPPING = (SUBTOTAL * 0.05).toFixed(2)
   const TOTAL =
-    SUBTOTAL + parseFloat(ESTIMATED_TAX) + parseFloat(ESTIMATED_SHIPPING)
+    (SUBTOTAL + parseFloat(ESTIMATED_TAX) + parseFloat(ESTIMATED_SHIPPING)).toFixed(2)
+
 
   const onDelete = (id) => {
     dispatch(removeProduct(id))
@@ -51,7 +52,7 @@ const Cart = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-10 h-[500px]'>
           {/* Left */}
 
-          <div className='grid md:overflow-auto'>
+          <div className='grid items-start md:overflow-auto'>
             {cart.length > 0
               ? cart.map((item) => (
                   <CartItem
@@ -65,7 +66,7 @@ const Cart = () => {
           {/* Left */}
 
           {/* Right */}
-          <div className='grid border rounded-md shadow-sm py-[54px] px-[64px]'>
+          <div className='grid border rounded-md shadow-sm py-4 px-4 md:py-[54px] md:px-[64px]'>
             <h1 className='font-bold text-2xl'>Order Summary</h1>
             <OrderSummaryItem title='Subtotal' value={SUBTOTAL} />
             <OrderSummaryItem title='Estimated Tax' value={ESTIMATED_TAX} />
@@ -75,7 +76,7 @@ const Cart = () => {
             />
             <OrderSummaryItem title='Total' value={TOTAL} />
 
-            <button className='h-[48px] w-full bg-black text-white rounded-md mt-[20px]'>
+            <button className='h-[48px] w-full bg-black text-white rounded-md my-[20px]'>
               Checkout
             </button>
           </div>
