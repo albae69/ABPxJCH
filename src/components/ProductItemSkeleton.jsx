@@ -1,6 +1,6 @@
 const ProductItemSkeleton = () => {
   return (
-    <div className='animate-pulse w-full  rounded-xl border border-gray-200 shadow-lg scale-95 hover:scale-100 cursor-pointer p-4'>
+    <div className='animate-pulse w-full  rounded-xl border border-gray-200 shadow-lg scale-95 cursor-pointer p-4'>
       <div className='h-[250px] w-full bg-gray-100 rounded-md mb-2' />
       <div className='w-full'>
         <div className='h-5 w-full bg-gray-100 rounded-md mb-1' />

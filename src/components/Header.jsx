@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { Menu, Transition } from '@headlessui/react'
 import { ShoppingCartIcon, UserCircleIcon } from '@heroicons/react/20/solid'
@@ -7,6 +7,8 @@ import { ShoppingCartIcon, UserCircleIcon } from '@heroicons/react/20/solid'
 import { useAuth } from '../utils/useAuth'
 
 const Header = () => {
+  const navigate = useNavigate()
+
   const cart = useSelector((state) => state.cartReducer.cart)
 
   // if current location is login page, remove login link
@@ -16,7 +18,8 @@ const Header = () => {
 
   const onLogout = async () => {
     await localStorage.removeItem('token')
-    window.location.reload()
+    navigate('/')
+
   }
 
   return (
